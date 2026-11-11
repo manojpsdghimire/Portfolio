@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f8f8f4">
+<meta name="description" content="Manoj Ghimire — engineer by experience, architect by mindset. Explore my work, skills and ideas.">
+<title>Manoj Ghimire — Engineer, Architect & Curious Human</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+ --bg:#f8f8f4;--surface:#fff;--surface2:#eff2ea;
+ --text:#20251f;--muted:#626c60;--border:#dfe5da;
+ --lime:#c9f58d;--accent:#4d7826;--purple:#eee8fb;
+ --terminal:#17221b;--terminalText:#d0f8c3;
+ --shadow:0 18px 55px rgba(30,45,25,.055);
+}
+html[data-theme=dark]{
+ --bg:#101410;--surface:#1d241e;--surface2:#283128;
+ --text:#f3f7ee;--muted:#c0ccbd;--border:#435143;
+ --lime:#c9f58d;--accent:#bdf18a;--purple:#332c43;
+ --terminal:#080e0a;--terminalText:#d1f8bd;
+ --shadow:0 20px 55px rgba(0,0,0,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:var(--bg);color:var(--text);
+ font-family:"DM Sans",sans-serif;
+ transition:background .3s,color .3s;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{
+ outline:3px solid var(--accent);outline-offset:3px;
+}
+.container{width:min(1160px,calc(100% - 40px));margin:auto}
+h1,h2,h3,.logo{font-family:"Space Grotesk",sans-serif}
+h1{font-size:clamp(3.1rem,7.5vw,7rem);line-height:1.06;letter-spacing:-.075em;margin:20px 0}
+h2{font-size:clamp(2rem,4.5vw,3.8rem);line-height:1.12;letter-spacing:-.055em;margin:12px 0 20px}
+h3{font-size:1.35rem;letter-spacing:-.03em}
+p{line-height:1.75;color:var(--muted)}
+section{padding:90px 0;scroll-margin-top:90px}
+.eyebrow{
+ color:var(--accent);font:500 .75rem "DM Mono",monospace;
+ letter-spacing:.12em;text-transform:uppercase;
+}
+.highlight{
+ color:var(--text);
+ background:linear-gradient(transparent 66%,var(--lime) 66%);
+ box-decoration-break:clone;-webkit-box-decoration-break:clone;
+}
+html[data-theme=dark] .highlight{
+ color:#f3f7ee;
+ background:linear-gradient(transparent 68%,#75a847 68%);
+}
+.btn{
+ display:inline-flex;align-items:center;justify-content:center;gap:8px;
+ padding:14px 22px;border-radius:99px;
+ background:var(--surface);border:1px solid var(--border);
+ color:var(--text);font-weight:700;transition:.2s;
+}
+.btn:hover{transform:translateY(-3px);border-color:var(--accent)}
+.btn.primary{background:var(--lime);color:#1b2815;border-color:var(--lime)}
+.card{
+ background:var(--surface);border:1px solid var(--border);
+ border-radius:24px;box-shadow:var(--shadow);
+}
+header{
+ position:sticky;top:0;z-index:100;
+ background:var(--bg);border-bottom:1px solid var(--border);
+}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:1.65rem;font-weight:700;letter-spacing:-.07em}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{font-size:.87rem;font-weight:600;color:var(--muted)}
+.nav-links a:hover{color:var(--accent)}
+.nav-actions{display:flex;gap:8px}
+.theme-btn,.menu-btn{
+ background:var(--surface);color:var(--text);
+ border:1px solid var(--border);border-radius:99px;padding:10px 15px;
+}
+.menu-btn{display:none}
+.hero{padding-top:90px;padding-bottom:75px}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.hello{
+ display:inline-flex;align-items:center;gap:8px;
+ padding:9px 14px;background:var(--surface2);
+ border-radius:99px;font-size:.84rem;
+}
+.hero-copy{font-size:1.08rem;max-width:620px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.note{
+ display:inline-block;color:var(--accent);font:400 .78rem "DM Mono",monospace;
+ transform:rotate(-3deg);margin-top:25px;
+}
+.avatar{height:410px;display:grid;place-items:center;position:relative}
+.blob{
+ width:min(320px,85%);aspect-ratio:1;background:var(--lime);
+ border-radius:45% 55% 58% 42%;display:grid;place-items:center;
+ animation:morph 8s ease-in-out infinite;
+}
+.face{
+ width:66%;aspect-ratio:1;border:4px solid #273321;
+ border-radius:46%;transform:rotate(-7deg);
+}
+.eyes{display:flex;justify-content:space-around;margin-top:36%}
+.eye{width:13px;height:13px;background:#273321;border-radius:50%}
+.smile{width:75px;height:35px;border-bottom:5px solid #273321;border-radius:50%;margin:18px auto}
+.float-label{
+ position:absolute;background:var(--surface);border:1px solid var(--border);
+ padding:12px 15px;border-radius:14px;font-size:.8rem;font-weight:700;
+ box-shadow:var(--shadow);animation:float 5s ease-in-out infinite;
+}
+.float-label.a{top:10%;left:0;transform:rotate(-7deg)}
+.float-label.b{top:23%;right:0;animation-delay:-1.5s}
+.float-label.c{bottom:12%;right:0;animation-delay:-3s}
+@keyframes morph{50%{border-radius:57% 43% 45% 55%;transform:rotate(5deg)}}
+@keyframes float{50%{translate:0 -12px}}
+.bento{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px}
+.bento-item{padding:28px;min-height:210px;transition:.25s}
+.bento-item:hover{transform:translateY(-5px);border-color:var(--accent)}
+.bento-item .emoji{font-size:2rem}
+.bento-item h3{margin:28px 0 8px}
+.bento-item p{font-size:.87rem;margin:0}
+.bento-item.green{background:var(--lime);color:#1b2815}
+.bento-item.green p{color:#405337}
+.bento-item.purple{background:var(--purple)}
+.section-head{max-width:740px;margin-bottom:35px}
+.brain-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px}
+.brain-visual{padding:20px;position:relative;overflow:hidden}
+.brain-visual:before{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background-image:radial-gradient(var(--border) 1px,transparent 1px);
+ background-size:23px 23px;opacity:.6;
+}
+.brain-top,.brain-bottom{position:relative;z-index:2}
+.brain-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.live{font:500 .7rem "DM Mono",monospace;color:var(--accent);letter-spacing:.08em}
+.live:before{
+ content:"";display:inline-block;width:8px;height:8px;border-radius:50%;
+ background:var(--accent);margin-right:8px;
+ box-shadow:0 0 0 5px rgba(130,190,80,.12);
+ animation:pulse 2s infinite;
+}
+@keyframes pulse{50%{box-shadow:0 0 0 12px transparent}}
+.brain-prompt{font-weight:700;font-size:.95rem;margin-top:13px}
+.brain-bottom{
+ display:flex;justify-content:space-between;gap:10px;
+ color:var(--muted);font-size:.72rem;
+}
+#brainSvg{width:100%;height:440px;display:block;position:relative;z-index:1}
+.brain-edge{stroke:var(--muted);stroke-width:1.5;opacity:.2;transition:.3s}
+.brain-edge.active{
+ stroke:var(--accent);stroke-width:2.7;opacity:1;
+ stroke-dasharray:8 6;animation:flow 2s linear infinite;
+}
+@keyframes flow{to{stroke-dashoffset:-28}}
+.brain-node{cursor:pointer;outline:none}
+.brain-node circle{
+ fill:var(--surface2);stroke:var(--border);stroke-width:2;
+ transition:fill .25s,stroke .25s,filter .25s;
+}
+.brain-node .node-label{fill:var(--text);font-size:12px;font-weight:700;pointer-events:none}
+.brain-node .node-icon{font-size:21px;pointer-events:none}
+.brain-node:hover circle,.brain-node:focus-visible circle{
+ stroke:var(--accent);stroke-width:3;
+ filter:drop-shadow(0 0 10px rgba(130,190,80,.4));
+}
+.brain-node.active circle{fill:var(--lime);stroke:#638c37;stroke-width:3}
+.brain-node.active .node-label{fill:#1d2b18}
+.brain-node.related circle{stroke:var(--accent);stroke-width:2.5}
+.brain-detail{padding:32px;display:flex;flex-direction:column;min-height:500px}
+.big-icon{font-size:3rem;margin:15px 0}
+.brain-detail h3{font-size:2rem;margin:5px 0}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.tag{border:1px solid var(--border);border-radius:99px;padding:8px 12px;font-size:.75rem;color:var(--muted)}
+.connection-note{margin-top:auto;padding-top:25px;font-size:.83rem;color:var(--muted)}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.project{padding:28px;transition:.25s}
+.project:hover{transform:translateY(-5px);border-color:var(--accent)}
+.project-art{height:185px;border-radius:17px;display:grid;place-items:center;margin-bottom:22px}
+.project-art span{font-size:5rem;transition:transform .3s}
+.project:hover .project-art span{transform:scale(1.13) rotate(-7deg)}
+.art-green{background:#dcefe4}.art-purple{background:#ebe2fa}
+.art-orange{background:#fcebd4}.art-blue{background:#dce8fa}
+html[data-theme=dark] .art-green{background:#294235}
+html[data-theme=dark] .art-purple{background:#3a304e}
+html[data-theme=dark] .art-orange{background:#4b3927}
+html[data-theme=dark] .art-blue{background:#293d55}
+.project-type{font:500 .72rem "DM Mono",monospace;color:var(--accent)}
+.project h3{margin:12px 0;color:var(--text)}
+.project p{font-size:.9rem;color:var(--muted)}
+.project-more{
+ border:0;background:none;color:var(--accent);font-weight:700;
+ padding:12px 0;margin-top:10px;
+}
+.project-extra{display:none;border-top:1px solid var(--border);padding-top:15px}
+.project.expanded .project-extra{display:block}
+.project-extra strong{display:block;margin-top:12px;color:var(--text)}
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:25px}
+.about-card{padding:35px;background:var(--purple)}
+.about-card h3{font-size:1.9rem}
+.timeline{border-left:2px solid var(--border);padding-left:30px;margin-left:12px}
+.timeline-item{position:relative;margin-bottom:34px}
+.timeline-item:before{
+ content:"";position:absolute;left:-40px;top:5px;
+ width:14px;height:14px;border-radius:50%;
+ background:var(--lime);border:3px solid var(--accent);
+}
+.timeline-item small{font:500 .76rem "DM Mono",monospace;color:var(--accent)}
+.timeline-item h3{margin:8px 0}
+.timeline-item p{font-size:.9rem}
+.tools{display:flex;flex-wrap:wrap;gap:10px}
+.tool{background:var(--surface);border:1px solid var(--border);padding:13px 17px;border-radius:12px;font-size:.86rem}
+.tool:hover{border-color:var(--accent)}
+.terminal{overflow:hidden;border-radius:20px;background:var(--terminal);box-shadow:0 25px 60px #0002}
+.terminal-bar{background:#29352c;padding:14px 20px;display:flex;align-items:center;gap:7px}
+.dot{width:11px;height:11px;border-radius:50%;background:#ff7778}
+.dot:nth-child(2){background:#ffcb66}.dot:nth-child(3){background:#7ce6a2}
+.terminal-title{margin-left:14px;color:#c3d3c1;font:400 .75rem "DM Mono",monospace}
+.terminal-output{
+ height:320px;overflow-y:auto;padding:24px;
+ color:var(--terminalText);font:400 .85rem/1.8 "DM Mono",monospace;
+}
+.terminal-line{white-space:pre-wrap;overflow-wrap:anywhere;margin-bottom:9px}
+.terminal-form{
+ display:flex;gap:10px;padding:17px 24px;border-top:1px solid #3e5040;
+ font:400 .85rem "DM Mono",monospace;
+}
+.terminal-form label{color:#9af0a0}
+.terminal-form input{background:none;border:0;outline:none;color:#fff;flex:1;min-width:0;font:inherit}
+.contact{text-align:center;padding:65px 25px;background:var(--surface2)}
+.contact p{max-width:580px;margin:0 auto 25px}
+footer{padding:30px 0;border-top:1px solid var(--border)}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:.83rem}
+.footer-links{display:flex;gap:18px}
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:950px){
+ .hero-grid,.brain-grid,.about-grid{grid-template-columns:1fr}
+ .bento{grid-template-columns:repeat(2,1fr)}
+ .bento-item:first-child{grid-column:span 2}
+ .avatar{height:330px}
+}
+@media(max-width:650px){
+ section{padding:65px 0}
+ .menu-btn{display:block}
+ .nav-links{
+  display:none;position:absolute;top:76px;left:0;right:0;
+  padding:25px;background:var(--surface);border-bottom:1px solid var(--border);
+  flex-direction:column;align-items:flex-start;
+ }
+ .nav-links.open{display:flex}
+ .hero{padding-top:55px}
+ .avatar{height:300px}
+ .blob{width:230px}
+ .projects,.bento{grid-template-columns:1fr}
+ .bento-item:first-child{grid-column:auto}
+ .brain-visual{padding:13px}
+ #brainSvg{height:340px}
+ .brain-detail{min-height:350px}
+ .brain-bottom{flex-wrap:wrap}
+ .contact{padding:40px 18px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+ .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+ <a class="logo" href="#home">manoj<span>.dev</span></a>
+ <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+  <a href="#brain">My Brain</a>
+  <a href="#projects">Projects</a>
+  <a href="#about">About</a>
+  <a href="#terminal">Terminal</a>
+  <a href="#contact">Contact</a>
+ </nav>
+ <div class="nav-actions">
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">☾ Dark</button>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+ </div>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+ <div>
+  <div class="hello">👋 Hey, I'm Manoj!</div>
+  <h1>I make<br>complex things<br><span class="highlight">make sense.</span></h1>
+  <p class="hero-copy">Engineer by experience. Architect by mindset. Curious about everything in between.</p>
+  <p class="hero-copy">I love connecting ideas, technology, security, and people to build thoughtful solutions that actually work.</p>
+  <div class="actions">
+   <a class="btn primary" href="#projects">See what I've built ↗</a>
+   <a class="btn" href="#brain">Explore my brain →</a>
+  </div>
+  <div class="note">↳ Currently building cool things in healthcare technology.</div>
+ </div>
+ <div class="avatar" aria-hidden="true">
+  <div class="blob">
+   <div class="face">
+    <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+    <div class="smile"></div>
+   </div>
+  </div>
+  <div class="float-label a">💡 Big-picture thinker</div>
+  <div class="float-label b">🔐 Security-minded</div>
+  <div class="float-label c">⚡ Hands-on builder</div>
+ </div>
+</div>
+</section>
+
+<div class="container">
+<div class="bento">
+ <a class="card bento-item green" href="#brain">
+  <div class="emoji">🧠</div>
+  <h3>What's inside my brain?</h3>
+  <p>Click around and see how my skills connect.</p>
+ </a>
+ <a class="card bento-item purple" href="#projects">
+  <div class="emoji">🛠️</div>
+  <h3>Things I've built</h3>
+  <p>Real challenges, solutions, and lessons.</p>
+ </a>
+ <a class="card bento-item" href="#terminal">
+  <div class="emoji">⌨️</div>
+  <h3>Talk to my terminal</h3>
+  <p>Because a regular About Me page is too boring.</p>
+ </a>
+</div>
+</div>
+
+<section id="brain">
+<div class="container">
+ <div class="section-head reveal">
+  <div class="eyebrow">01 / My brain, visualized</div>
+  <h2>Nothing exists <span class="highlight">in isolation.</span></h2>
+  <p>I see architecture, security, engineering, data, and AI as connected parts of the same problem. Explore the map to see how I connect the dots.</p>
+ </div>
+ <div class="brain-grid reveal">
+  <div class="card brain-visual">
+   <div class="brain-top">
+    <span class="live">INTERACTIVE SKILL MAP</span>
+    <span class="eyebrow">7 disciplines</span>
+   </div>
+   <div class="brain-prompt">👆 Click a skill to explore its connections</div>
+   <svg id="brainSvg" viewBox="0 0 600 460" role="group" aria-label="Interactive skill map"></svg>
+   <div class="brain-bottom">
+    <span>✦ Select any node</span>
+    <span>Keyboard: Tab + Enter</span>
+   </div>
+  </div>
+  <div class="card brain-detail" aria-live="polite">
+   <div class="eyebrow">Selected skill</div>
+   <div class="big-icon" id="skillIcon">🧩</div>
+   <h3 id="skillTitle">Architecture</h3>
+   <p id="skillDescription"></p>
+   <div class="tags" id="skillTags"></div>
+   <div class="connection-note" id="skillConnections"></div>
+  </div>
+ </div>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+ <div class="section-head reveal">
+  <div class="eyebrow">02 / Things I've worked on</div>
+  <h2>Ideas that became <span class="highlight">real things.</span></h2>
+  <p>A public-friendly look at interesting enterprise challenges I've worked on. Click Read the story to learn about my contributions.</p>
+ </div>
+ <div class="projects">
+  <article class="card project reveal">
+   <div class="project-art art-green"><span>🧩</span></div>
+   <div class="project-type">ENTERPRISE SYSTEMS</div>
+   <h3>Making disconnected systems work together</h3>
+   <p>Connecting workforce applications, business processes, and enterprise data into cohesive experiences.</p>
+   <button class="project-more" aria-expanded="false">Read the story +</button>
+   <div class="project-extra">
+    <strong>The challenge</strong><p>Information and workflows often span disconnected systems and organizational teams.</p>
+    <strong>My contribution</strong><p>Application architecture, integrations, data transformation, and full-stack development.</p>
+    <strong>What matters</strong><p>Reliable information flows, maintainability, scalability, and intuitive user experiences.</p>
+   </div>
+  </article>
+  <article class="card project reveal">
+   <div class="project-art art-purple"><span>🔐</span></div>
+   <div class="project-type">SECURITY & GOVERNANCE</div>
+   <h3>Security shouldn't be an afterthought</h3>
+   <p>Designing applications where identity, authorization, data protection, and auditability are foundational.</p>
+   <button class="project-more" aria-expanded="false">Read the story +</button>
+   <div class="project-extra">
+    <strong>The challenge</strong><p>Enterprise environments require precise access boundaries and auditable administration.</p>
+    <strong>My contribution</strong><p>SSO, role-based authorization, access governance, audit logging, and security documentation.</p>
+    <strong>What matters</strong><p>Least privilege, traceability, and secure-by-design implementation.</p>
+   </div>
+  </article>
+  <article class="card project reveal">
+   <div class="project-art art-orange"><span>⚙️</span></div>
+   <div class="project-type">WORKFLOW AUTOMATION</div>
+   <h3>Turning complicated rules into simple experiences</h3>
+   <p>Building configurable processes for assignments, approvals, performance workflows, and tracking.</p>
+   <button class="project-more" aria-expanded="false">Read the story +</button>
+   <div class="project-extra">
+    <strong>The challenge</strong><p>Policies change, responsibilities vary, and manual coordination creates complexity.</p>
+    <strong>My contribution</strong><p>Workflow engines, assignment rules, state models, audit history, and reporting.</p>
+    <strong>What matters</strong><p>Predictability, transparency, and flexibility.</p>
+   </div>
+  </article>
+  <article class="card project reveal">
+   <div class="project-art art-blue"><span>✨</span></div>
+   <div class="project-type">AI & INNOVATION</div>
+   <h3>Finding useful places for AI</h3>
+   <p>Developing and exploring AI-assisted experiences that help people work with information more effectively.</p>
+   <button class="project-more" aria-expanded="false">Read the story +</button>
+   <div class="project-extra">
+    <strong>The challenge</strong><p>Useful organizational information can be difficult to find and act upon.</p>
+    <strong>My contribution</strong><p>Azure OpenAI integration, contextual workflows, and sensitive-data protection considerations.</p>
+    <strong>What matters</strong><p>Practical value, responsible AI, and human oversight.</p>
+   </div>
+  </article>
+ </div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+ <div class="section-head reveal">
+  <div class="eyebrow">03 / A little about me</div>
+  <h2>More than <span class="highlight">just code.</span></h2>
+ </div>
+ <div class="about-grid">
+  <div class="card about-card reveal">
+   <div style="font-size:3rem">👋</div>
+   <h3>Hi again. I'm Manoj.</h3>
+   <p>I'm based in Columbia, Missouri. I've worked across healthcare, higher education, and government technology.</p>
+   <p>I enjoy the space between understanding a complex problem and designing a system that solves it. Sometimes that means writing code. Other times it means rethinking the architecture entirely.</p>
+   <p>Outside technology, I enjoy traveling, soccer, photography, outdoor adventures, and DIY projects.</p>
+   <p><strong>My philosophy:</strong> Understand the problem first. Choose the technology second.</p>
+  </div>
+  <div class="timeline reveal">
+   <div class="timeline-item">
+    <small>2020 — PRESENT</small><h3>University of Missouri Health Care</h3>
+    <p>Instructional Application Developer — Enterprise applications, architecture, security, integrations, automation, and AI.</p>
+   </div>
+   <div class="timeline-item">
+    <small>2018 — 2020</small><h3>Westminster College</h3>
+    <p>System Analyst / Application Developer — Institutional applications, integrations, and modernization.</p>
+   </div>
+   <div class="timeline-item">
+    <small>2019</small><h3>State of Missouri</h3>
+    <p>Information Technologist I — Public-sector application development.</p>
+   </div>
+   <div class="timeline-item">
+    <small>2018</small><h3>Westminster College</h3>
+    <p>B.A. in Computer Science and Mathematics.</p>
+   </div>
+  </div>
+ </div>
+</div>
+</section>
+
+<section id="toolkit">
+<div class="container">
+ <div class="section-head reveal">
+  <div class="eyebrow">04 / Current toolkit</div>
+  <h2>Tools change. <span class="highlight">Curiosity doesn't.</span></h2>
+  <p>These are technologies and practices I work with today, not limits on what I can learn or build.</p>
+ </div>
+ <div class="tools reveal">
+  <span class="tool">C# / .NET</span><span class="tool">ASP.NET Core</span>
+  <span class="tool">SQL Server</span><span class="tool">Entity Framework Core</span>
+  <span class="tool">Azure OpenAI</span><span class="tool">Microsoft Graph</span>
+  <span class="tool">Microsoft Entra ID</span><span class="tool">REST APIs</span>
+  <span class="tool">JavaScript</span><span class="tool">PowerShell</span>
+  <span class="tool">SSIS / ETL</span><span class="tool">IIS</span>
+  <span class="tool">Git / CI/CD</span><span class="tool">Security Architecture</span>
+  <span class="tool">System Design</span><span class="tool">Workflow Automation</span>
+  <span class="tool">Enterprise Integrations</span><span class="tool">Data Engineering</span>
+ </div>
+</div>
+</section>
+
+<section id="terminal">
+<div class="container">
+ <div class="section-head reveal">
+  <div class="eyebrow">05 / The fun part</div>
+  <h2>Let's talk <span class="highlight">terminal.</span></h2>
+  <p>Type <strong>help</strong> to explore. You can also change the theme with <code>theme dark</code> or <code>theme light</code>.</p>
+ </div>
+ <div class="terminal reveal">
+  <div class="terminal-bar">
+   <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+   <span class="terminal-title">manoj@portfolio — terminal</span>
+  </div>
+  <div class="terminal-output" id="terminalOutput" aria-live="polite">
+   <div class="terminal-line">Hey there! 👋 Welcome to my corner of the internet.</div>
+   <div class="terminal-line">Type 'help' to see what you can do.</div>
+  </div>
+  <form class="terminal-form" id="terminalForm">
+   <label for="terminalInput">visitor@manoj:~$</label>
+   <input id="terminalInput" autocomplete="off" spellcheck="false" aria-label="Terminal command">
+  </form>
+ </div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+ <div class="card contact reveal">
+  <div class="eyebrow">06 / Say hello</div>
+  <h2>Let's build something <span class="highlight">interesting.</span></h2>
+  <p>Have an interesting challenge, idea, or just want to talk technology? I'd love to connect.</p>
+  <div class="actions" style="justify-content:center">
+   <a class="btn primary" href="mailto:manoj.psd.ghimire@gmail.com">Send me an email ↗</a>
+   <a class="btn" href="https://www.linkedin.com/in/manoj-psd-ghimire/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+   <a class="btn" href="https://github.com/manojpsdghimire" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+  </div>
+ </div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-inner">
+ <span>© <span id="year"></span> Manoj Ghimire. Made with curiosity ☕</span>
+ <div class="footer-links">
+  <a href="#home">Back to top ↑</a>
+  <a href="mailto:manoj.psd.ghimire@gmail.com">Email</a>
+ </div>
+</div>
+</footer>
+
+<script>
+"use strict";
+
+// Theme — defaults to light
+const root=document.documentElement;
+const themeBtn=document.getElementById("themeBtn");
+function setTheme(theme){
+ const value=theme==="dark"?"dark":"light";
+ root.dataset.theme=value;
+ themeBtn.textContent=value==="dark"?"☀ Light":"☾ Dark";
+ themeBtn.setAttribute("aria-label","Switch to "+(value==="dark"?"light":"dark")+" mode");
+ try{localStorage.setItem("manoj-theme",value)}catch(e){}
+}
+let saved="light";
+try{saved=localStorage.getItem("manoj-theme")||"light"}catch(e){}
+setTheme(saved);
+themeBtn.addEventListener("click",()=>setTheme(root.dataset.theme==="dark"?"light":"dark"));
+
+// Navigation
+const menuBtn=document.getElementById("menuBtn");
+const navLinks=document.getElementById("navLinks");
+menuBtn.addEventListener("click",()=>{
+ const open=navLinks.classList.toggle("open");
+ menuBtn.setAttribute("aria-expanded",String(open));
+});
+navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+ navLinks.classList.remove("open");
+ menuBtn.setAttribute("aria-expanded","false");
+}));
+document.getElementById("year").textContent=new Date().getFullYear();
+
+// Scroll reveals
+if("IntersectionObserver" in window){
+ const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+   if(entry.isIntersecting){
+    entry.target.classList.add("visible");
+    observer.unobserve(entry.target);
+   }
+  });
+ },{threshold:.08});
+ document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+}else{
+ document.querySelectorAll(".reveal").forEach(el=>el.classList.add("visible"));
+}
+
+// Interactive brain
+const skills=[
+ {id:"architecture",name:"Architecture",icon:"🧩",x:300,y:220,
+ description:"I enjoy seeing the bigger picture: how applications, people, data, and business requirements fit together.",
+ tags:["System Design","Architecture Patterns","Scalability","Technical Decisions"],
+ links:["strategy","security","engineering","data","integration","ai"]},
+ {id:"strategy",name:"Strategy",icon:"💡",x:300,y:60,
+ description:"The best technical solutions start with understanding people, processes, and the outcomes that matter.",
+ tags:["Discovery","Requirements","Problem Solving","Planning"],
+ links:["architecture","engineering","ai"]},
+ {id:"security",name:"Security",icon:"🔐",x:105,y:135,
+ description:"Secure systems begin with good architecture. Identity, permissions, governance, and auditability belong in the design.",
+ tags:["SSO","RBAC","Governance","Audit Logging","Data Protection"],
+ links:["architecture","engineering","data","integration"]},
+ {id:"engineering",name:"Engineering",icon:"⚡",x:495,y:135,
+ description:"I enjoy turning architectural ideas into working software, from backend services to intuitive user experiences.",
+ tags:["Full Stack","APIs","Testing","Maintainability","Automation"],
+ links:["architecture","strategy","security","integration"]},
+ {id:"data",name:"Data",icon:"📊",x:105,y:320,
+ description:"Data connects enterprise systems. I work with models, integrations, transformations, analytics, and performance.",
+ tags:["SQL","ETL","Data Modeling","Analytics","Optimization"],
+ links:["architecture","security","integration","ai"]},
+ {id:"ai",name:"AI",icon:"✨",x:495,y:320,
+ description:"I'm interested in useful AI that helps people understand information, automate work, and make decisions responsibly.",
+ tags:["Azure OpenAI","AI Integration","Automation","Responsible AI"],
+ links:["architecture","strategy","data","integration"]},
+ {id:"integration",name:"Integration",icon:"🔗",x:300,y:405,
+ description:"I like making different platforms communicate reliably through APIs, data pipelines, and secure exchange patterns.",
+ tags:["REST APIs","Microsoft Graph","SFTP","Enterprise Integrations"],
+ links:["architecture","security","engineering","data","ai"]}
+];
+
+const svg=document.getElementById("brainSvg");
+const ns="http://www.w3.org/2000/svg";
+const edges=[];
+const nodeMap=new Map();
+function svgEl(tag,attrs={}){
+ const el=document.createElementNS(ns,tag);
+ Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));
+ return el;
+}
+const edgeGroup=svgEl("g");
+const nodeGroup=svgEl("g");
+svg.append(edgeGroup,nodeGroup);
+const seen=new Set();
+skills.forEach(a=>a.links.forEach(id=>{
+ const b=skills.find(s=>s.id===id);
+ const key=[a.id,b.id].sort().join("-");
+ if(seen.has(key))return;
+ seen.add(key);
+ const line=svgEl("line",{x1:a.x,y1:a.y,x2:b.x,y2:b.y,class:"brain-edge"});
+ edgeGroup.appendChild(line);
+ edges.push({a:a.id,b:b.id,el:line});
+}));
+
+skills.forEach(skill=>{
+ const g=svgEl("g",{
+  class:"brain-node",tabindex:"0",role:"button",
+  "aria-label":"Explore "+skill.name,"aria-pressed":"false"
+ });
+ const circle=svgEl("circle",{
+  cx:skill.x,cy:skill.y,r:skill.id==="architecture"?48:43
+ });
+ const icon=svgEl("text",{
+  x:skill.x,y:skill.y-7,"text-anchor":"middle",class:"node-icon","aria-hidden":"true"
+ });
+ icon.textContent=skill.icon;
+ const label=svgEl("text",{
+  x:skill.x,y:skill.y+18,"text-anchor":"middle",class:"node-label"
+ });
+ label.textContent=skill.name;
+ g.append(circle,icon,label);
+ g.addEventListener("click",()=>selectSkill(skill.id));
+ g.addEventListener("keydown",e=>{
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();selectSkill(skill.id)}
+ });
+ nodeGroup.appendChild(g);
+ nodeMap.set(skill.id,g);
+});
+
+function selectSkill(id){
+ const skill=skills.find(s=>s.id===id);
+ if(!skill)return;
+ nodeMap.forEach((el,key)=>{
+  el.classList.toggle("active",key===id);
+  el.classList.toggle("related",key!==id&&skill.links.includes(key));
+  el.setAttribute("aria-pressed",String(key===id));
+ });
+ edges.forEach(edge=>{
+  edge.el.classList.toggle("active",
+   (edge.a===id&&skill.links.includes(edge.b))||
+   (edge.b===id&&skill.links.includes(edge.a))
+  );
+ });
+ document.getElementById("skillIcon").textContent=skill.icon;
+ document.getElementById("skillTitle").textContent=skill.name;
+ document.getElementById("skillDescription").textContent=skill.description;
+ const tags=document.getElementById("skillTags");
+ tags.replaceChildren();
+ skill.tags.forEach(t=>{
+  const span=document.createElement("span");
+  span.className="tag";span.textContent=t;tags.appendChild(span);
+ });
+ document.getElementById("skillConnections").textContent=
+  "Connected to: "+skill.links.map(id=>skills.find(s=>s.id===id).name).join(" · ");
+}
+selectSkill("architecture");
+
+// Expand project stories
+document.querySelectorAll(".project-more").forEach(button=>{
+ button.addEventListener("click",()=>{
+  const card=button.closest(".project");
+  const open=card.classList.toggle("expanded");
+  button.setAttribute("aria-expanded",String(open));
+  button.textContent=open?"Close story −":"Read the story +";
+ });
+});
+
+// Terminal
+const terminalOutput=document.getElementById("terminalOutput");
+const terminalInput=document.getElementById("terminalInput");
+const commands={
+ help:`Available commands:
+ help          Show commands
+ about         About me
+ skills        My areas of expertise
+ projects      Selected work
+ experience    Career timeline
+ contact       Contact details
+ theme dark    Switch to dark mode
+ theme light   Switch to light mode
+ clear         Clear terminal
+
+There may be a few hidden commands...`,
+ about:"Hey! I'm Manoj Ghimire.\nEngineer by experience. Architect by mindset.\nBased in Columbia, Missouri.\nI enjoy making complex things make sense.",
+ skills:"Architecture | Security | Engineering | Data | AI | Integration | Strategy",
+ projects:"01 Connected enterprise systems\n02 Security & governance\n03 Workflow automation\n04 AI-assisted experiences",
+ experience:"2020–Present: University of Missouri Health Care\n2018–2020: Westminster College\n2019: State of Missouri\n2018: B.A. Computer Science & Mathematics",
+ contact:"Email: manoj.psd.ghimire@gmail.com\nWebsite: manojpsdghimire.com\nLinkedIn: linkedin.com/in/manoj-psd-ghimire",
+ coffee:"☕ Coffee: the unofficial runtime dependency.",
+ sudo:"Nice try. You already have permission to explore. 😄",
+ dog:"🐶 Dogs make excellent debugging companions.",
+ secret:"🎉 Easter egg unlocked. Curiosity rewarded!",
+ hello:"Hey there! 👋 Thanks for stopping by.",
+ whoami:"visitor — curious human exploring Manoj's portfolio",
+ ls:"about  skills  projects  experience  contact  ideas.txt",
+ "cat ideas.txt":"Build thoughtfully. Secure by design. Keep learning."
+};
+function printLine(text){
+ const div=document.createElement("div");
+ div.className="terminal-line";div.textContent=text;
+ terminalOutput.appendChild(div);
+ terminalOutput.scrollTop=terminalOutput.scrollHeight;
+}
+document.getElementById("terminalForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const cmd=terminalInput.value.trim().toLowerCase();
+ if(!cmd)return;
+ printLine("visitor@manoj:~$ "+cmd);
+ if(cmd==="clear")terminalOutput.replaceChildren();
+ else if(cmd==="theme dark"){setTheme("dark");printLine("Dark mode activated. 🌙")}
+ else if(cmd==="theme light"){setTheme("light");printLine("Light mode activated. ☀️")}
+ else printLine(commands[cmd]||"Command not found. Try 'help'.");
+ terminalInput.value="";
+});
+</script>
+</body>
+</html>
